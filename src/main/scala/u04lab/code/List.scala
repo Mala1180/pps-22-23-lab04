@@ -64,4 +64,9 @@ object List:
     case _ => Nil()
 
   def take[A](list: List[A], n: Int): List[A] = reverse(drop(reverse(list), length(list) - n))
+
+//  def indexOf[A](items: List[A], item: A): Int = (items, item) match
+//    case (_, _)
+
+
 end List
