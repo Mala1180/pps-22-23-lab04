@@ -1,17 +1,35 @@
 package u04lab.code
 
+import scala.annotation.{tailrec, targetName}
+
 // Express a second degree polynomial
 // Structure: secondDegree * X^2 + firstDegree * X + constant
 trait SecondDegreePolynomial:
   def constant: Double
+
   def firstDegree: Double
+
   def secondDegree: Double
+
   def +(polynomial: SecondDegreePolynomial): SecondDegreePolynomial
+
   def -(polynomial: SecondDegreePolynomial): SecondDegreePolynomial
 
 
 object SecondDegreePolynomial:
-  def apply(secondDegree: Double, firstDegree: Double, constant: Double): SecondDegreePolynomial = ??? // Fill here
+  def apply(secondDegree: Double, firstDegree: Double, constant: Double): SecondDegreePolynomial =
+    SecondDegreePolynomialImpl(constant, firstDegree, secondDegree)
+
+
+case class SecondDegreePolynomialImpl(override val constant: Double,
+                                 override val firstDegree: Double,
+                                 override val secondDegree: Double) extends SecondDegreePolynomial:
+  override def +(polynomial: SecondDegreePolynomial): SecondDegreePolynomial =
+    SecondDegreePolynomial(secondDegree + polynomial.secondDegree, firstDegree + polynomial.firstDegree, constant + polynomial.constant)
+
+  override def -(polynomial: SecondDegreePolynomial): SecondDegreePolynomial =
+    SecondDegreePolynomial(secondDegree - polynomial.secondDegree, firstDegree - polynomial.firstDegree, constant - polynomial.constant)
+
 
 @main def checkComplex(): Unit =
   val simplePolynomial = SecondDegreePolynomial(1.0, 0, 3)
@@ -23,8 +41,8 @@ object SecondDegreePolynomial:
   println((multipleOperations, multipleOperations.secondDegree, multipleOperations.firstDegree, multipleOperations.constant)) // 2.0 * X^2 + 1.0 * X + 2.0
 
 /** Hints:
-  *   - implement SecondDegreePolynomial with a SecondDegreePolynomialImpl class, similar to PersonImpl in slides
-  *   - check that equality and toString do not work
-  *   - use a case class SecondDegreePolynomialImpl instead
-  *   - check equality and toString now
-  */
+ *   - implement SecondDegreePolynomial with a SecondDegreePolynomialImpl class, similar to PersonImpl in slides
+ *   - check that equality and toString do not work
+ *   - use a case class SecondDegreePolynomialImpl instead
+ *   - check equality and toString now
+ */
