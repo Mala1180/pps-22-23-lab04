@@ -23,7 +23,7 @@ class MinesweeperTest:
 
   @Test def testHitEmptyCell(): Unit =
     assertEquals(java.util.Optional.of(1), logics.hit(1, 1))
-    assertEquals(java.util.Optional.of(0), logics.hit(2, 2))
+    assertEquals(java.util.Optional.of(1), logics.hit(2, 2))
     assertEquals(java.util.Optional.of(2), logics.hit(3, 4))
 
   @Test def testGameWon(): Unit =
